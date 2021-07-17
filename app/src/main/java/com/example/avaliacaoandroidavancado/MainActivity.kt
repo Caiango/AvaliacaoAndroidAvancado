@@ -7,6 +7,8 @@ import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.avaliacaoandroidavancado.model.DatabaseInstance
+import com.example.avaliacaoandroidavancado.model.NotificationDao
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,22 +16,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val db: NotificationDao? = DatabaseInstance.getInstance(this)?.notificationDao
+
         floatAdd.setOnClickListener {
-            val dialog = AlertDialog.Builder(this)
-            val view = LayoutInflater.from(this).inflate(R.layout.dialog_add, null)
-            dialog.setTitle(title)
-            dialog.setView(view)
-            val title = view.findViewById<EditText>(R.id.edt_title)
-            val text = view.findViewById<EditText>(R.id.edt_text)
-            val checkRepeat = view.findViewById<CheckBox>(R.id.cbRepeat)
-
-            dialog.setPositiveButton("Adicionar") { _: DialogInterface, _: Int ->
-
-            }
-            dialog.setNegativeButton("Cancelar") { _: DialogInterface, i: Int ->
-
-            }
-            dialog.show()
+            showDialog()
         }
+    }
+
+    private fun showDialog() {
+        val dialog = AlertDialog.Builder(this)
+        val view = LayoutInflater.from(this).inflate(R.layout.dialog_add, null)
+        dialog.setTitle(title)
+        dialog.setView(view)
+        val title = view.findViewById<EditText>(R.id.edt_title)
+        val text = view.findViewById<EditText>(R.id.edt_text)
+        val checkRepeat = view.findViewById<CheckBox>(R.id.cbRepeat)
+
+        dialog.setPositiveButton("Adicionar") { _: DialogInterface, _: Int ->
+
+        }
+        dialog.setNegativeButton("Cancelar") { _: DialogInterface, i: Int ->
+
+        }
+        dialog.show()
     }
 }
