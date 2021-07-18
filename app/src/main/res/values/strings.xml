@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">AvaliacaoAndroidAvancado</string>
+    <string name="daily">Diário</string>
+    <string name="once">Uma vez</string>
+    <string name="mydb">myDB</string>
+    <string name="add">Adicionar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="text">Texto</string>
+    <string name="repeat">Repetir?</string>
+    <string name="add_new_notification">Adicione sua Notificação</string>
+    <string name="title">Título</string>
+    <string name="your_notifications">Suas Notificações</string>
 </resources>

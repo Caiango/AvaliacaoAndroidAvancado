@@ -1,5 +1,6 @@
 package com.example.avaliacaoandroidavancado.ui
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,7 +8,7 @@ import com.example.avaliacaoandroidavancado.R
 import com.example.avaliacaoandroidavancado.databinding.RvItemsBinding
 import com.example.avaliacaoandroidavancado.model.MyNotifications
 
-class NotificationAdapter :
+class NotificationAdapter(val context: Context) :
     RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
     private lateinit var notifications: List<MyNotifications>
 
@@ -15,7 +16,7 @@ class NotificationAdapter :
         val title = view.txtTitle
         val text = view.txtText
         val repeat = view.txtRepeat
-        val time = view.txtxTime
+        val time = view.txtTime
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,7 +32,11 @@ class NotificationAdapter :
         holder.title.text = notification.title
         holder.text.text = notification.text
         holder.time.text = notification.time
-        holder.repeat.text = "Diário"
+        if (notification.repeat) {
+            holder.repeat.text = context.getString(R.string.daily)
+        } else {
+            holder.repeat.text = context.getString(R.string.once)
+        }
     }
 
     fun setList(list: List<MyNotifications>) {

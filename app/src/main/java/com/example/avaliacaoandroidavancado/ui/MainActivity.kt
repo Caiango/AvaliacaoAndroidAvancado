@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val db: NotificationDao? = DatabaseInstance.getInstance(this)?.notificationDao
         notificationViewModel = ViewModelProvider(this).get(NotificationViewModel::class.java)
         notificationViewModel.getAllNotifications(db!!)
-        adapter = NotificationAdapter()
+        adapter = NotificationAdapter(this)
         setupRV(rv)
 
         notificationViewModel.list.observe(this, {
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         val text = view.findViewById<EditText>(R.id.edt_text)
         val checkRepeat = view.findViewById<CheckBox>(R.id.cbRepeat)
 
-        dialog.setPositiveButton("Adicionar") { _: DialogInterface, _: Int ->
+        dialog.setPositiveButton(getString(R.string.add)) { _: DialogInterface, _: Int ->
             //mockando valores
             val notification = MyNotifications(
                 title = title.text.toString(),
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
             notificationViewModel.insertNotification(notification, db!!)
         }
-        dialog.setNegativeButton("Cancelar") { _: DialogInterface, i: Int ->
+        dialog.setNegativeButton(getString(R.string.cancel)) { _: DialogInterface, i: Int ->
 
         }
         dialog.show()
