@@ -1,6 +1,7 @@
-package com.example.avaliacaoandroidavancado
+package com.example.avaliacaoandroidavancado.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.avaliacaoandroidavancado.model.MyNotifications
@@ -11,12 +12,24 @@ import kotlinx.coroutines.withContext
 
 class NotificationViewModel : ViewModel() {
 
+    val list: MutableLiveData<List<MyNotifications>> = MutableLiveData()
+
     fun insertNotification(notification: MyNotifications, db: NotificationDao) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 db.insert(notification)
-                Log.d("meu banco", db.getAllNotifications().toString())
+                Log.d("mydb", "successful insert")
+                getAllNotifications(db)
             }
         }
+    }
+
+    fun getAllNotifications(db: NotificationDao) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                list.postValue(db.getAllNotifications())
+            }
+        }
+
     }
 }
