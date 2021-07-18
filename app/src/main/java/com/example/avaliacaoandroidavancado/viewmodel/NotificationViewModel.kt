@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 
 class NotificationViewModel : ViewModel() {
 
-    val list: MutableLiveData<List<MyNotifications>> = MutableLiveData()
+    val notificationList: MutableLiveData<List<MyNotifications>> = MutableLiveData()
 
     fun insertNotification(notification: MyNotifications, db: NotificationDao) {
         viewModelScope.launch {
@@ -27,7 +27,7 @@ class NotificationViewModel : ViewModel() {
     fun getAllNotifications(db: NotificationDao) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                list.postValue(db.getAllNotifications())
+                notificationList.postValue(db.getAllNotifications())
             }
         }
 

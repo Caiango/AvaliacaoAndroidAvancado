@@ -10,7 +10,7 @@ import com.example.avaliacaoandroidavancado.model.MyNotifications
 
 class NotificationAdapter(val context: Context) :
     RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
-    private lateinit var notifications: List<MyNotifications>
+    private var notifications: List<MyNotifications> = listOf()
 
     class ViewHolder(view: RvItemsBinding) : RecyclerView.ViewHolder(view.root) {
         val title = view.txtTitle
@@ -42,7 +42,6 @@ class NotificationAdapter(val context: Context) :
     fun setList(list: List<MyNotifications>) {
         notifications = list
     }
-
 
     override fun getItemCount(): Int = notifications.size
 }

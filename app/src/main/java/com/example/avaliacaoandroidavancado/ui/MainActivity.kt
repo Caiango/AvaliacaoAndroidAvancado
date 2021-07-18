@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         adapter = NotificationAdapter(this)
         setupRV(rv)
 
-        notificationViewModel.list.observe(this, {
+        notificationViewModel.notificationList.observe(this, {
             adapter.setList(it)
             adapter.notifyDataSetChanged()
         })
