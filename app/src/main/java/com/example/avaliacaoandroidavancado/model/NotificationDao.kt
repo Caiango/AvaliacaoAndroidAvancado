@@ -11,6 +11,6 @@ interface NotificationDao {
     suspend fun delete(notification: MyNotifications)
 
     @Query("SELECT * FROM notifications")
-    suspend fun getAllFavouriteCities(): List<MyNotifications>
+    suspend fun getAllNotifications(): List<MyNotifications>
 
 }
