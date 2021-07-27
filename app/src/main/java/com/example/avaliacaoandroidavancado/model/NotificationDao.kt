@@ -13,8 +13,8 @@ interface NotificationDao {
     @Query("SELECT * FROM notifications WHERE time = :times")
     suspend fun getNotificationByTime(times: String): List<MyNotifications>
 
-    @Query("DELETE FROM notifications WHERE time = :times")
-    suspend fun deleteNotificationByTime(times: String)
+    @Query("DELETE FROM notifications WHERE time = :times AND repeat = :repeat")
+    suspend fun deleteNotificationByTime(times: String, repeat: Boolean = false)
 
 
 }
