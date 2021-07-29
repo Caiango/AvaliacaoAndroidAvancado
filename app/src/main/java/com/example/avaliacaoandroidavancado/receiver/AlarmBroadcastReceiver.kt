@@ -18,7 +18,7 @@ class AlarmBroadcastReceiver : BroadcastReceiver() {
         val db: NotificationDao? = DatabaseInstance.getInstance(context!!)?.notificationDao
         val exactHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val exactMinute = Calendar.getInstance().get(Calendar.MINUTE)
-        val exactTime = "$exactHour:$exactMinute"
+        val exactTime = "$exactHour$exactMinute".toInt()
 
         NotificationViewModel().getNotificationByTime(db!!, exactTime, context)
     }

@@ -61,15 +61,21 @@ class MainActivity : AppCompatActivity() {
         val text = view.findViewById<EditText>(R.id.edt_text)
         val checkRepeat = view.findViewById<CheckBox>(R.id.cbRepeat)
         val timePicker = view.findViewById<TimePicker>(R.id.time)
+
         timePicker.setIs24HourView(true)
 
         dialog.setPositiveButton(getString(R.string.add)) { _: DialogInterface, _: Int ->
 
+            var dawn = timePicker.hour <= 1
+            var midday = timePicker.hour >= 12
+
             val notification = MyNotifications(
                 title = title.text.toString(),
                 text = text.text.toString(),
-                time = "${timePicker.hour}:${timePicker.minute}",
-                repeat = checkRepeat.isChecked
+                time = "${timePicker.hour}${timePicker.minute}".toInt(),
+                repeat = checkRepeat.isChecked,
+                dawn = dawn,
+                midday = midday
             )
 
             notificationViewModel.insertNotification(notification, db!!)

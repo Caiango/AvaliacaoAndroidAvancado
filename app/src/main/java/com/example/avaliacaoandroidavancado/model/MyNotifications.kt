@@ -8,6 +8,8 @@ data class MyNotifications(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String,
     val text: String,
-    val time: String,
-    val repeat: Boolean
+    val time: Int,
+    val repeat: Boolean,
+    val dawn: Boolean,
+    val midday: Boolean
 )

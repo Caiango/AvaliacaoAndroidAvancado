@@ -4,6 +4,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -18,7 +19,7 @@ class NotificationHelper {
 
     companion object {
 
-        fun createNotification(context: Context, notification: MyNotifications, time: String) {
+        fun createNotification(context: Context, notification: MyNotifications, time: Int) {
             val intentOpen = Intent(context, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             }
@@ -38,7 +39,10 @@ class NotificationHelper {
             NotificationManagerCompat.from(context).createNotificationChannel(channel.build())
 
             val builder = NotificationCompat.Builder(context, "NOTIFICATION CHANNEL")
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.ic_alarm)
+                .setLargeIcon(
+                    BitmapFactory.decodeResource(context.resources, R.drawable.ic_alarm)
+                )
                 .setContentTitle(notification.title)
                 .setContentText(notification.text)
                 .setStyle(NotificationCompat.BigTextStyle().bigText(notification.text))

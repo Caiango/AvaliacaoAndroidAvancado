@@ -31,7 +31,7 @@ class NotificationAdapter(val context: Context) :
 
         holder.title.text = notification.title
         holder.text.text = notification.text
-        holder.time.text = notification.time
+        holder.time.text = notification.time.toString()
         if (notification.repeat) {
             holder.repeat.text = context.getString(R.string.daily)
         } else {
