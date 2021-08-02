@@ -28,34 +28,10 @@ class NotificationAdapter(val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val notification = notifications[position]
-        val time = notification.time.toString()
-        var finalTime = ""
-        var hour = ""
-        var minute = ""
 
         holder.title.text = notification.title
         holder.text.text = notification.text
-        if (notification.midday && time.length == 4 || !notification.midday && time.length == 4) {
-            hour = time.substring(0..1)
-            minute = time.substring(2..3)
-            finalTime = "$hour:$minute"
-            holder.time.text = finalTime
-        } else if (notification.midday && time.length == 3 ) {
-            hour = time.substring(0..1)
-            minute = time.substring(2..2)
-            finalTime = "$hour:$minute"
-            holder.time.text = finalTime
-        } else if (!notification.midday && time.length == 3) {
-            hour = time.substring(0..0)
-            minute = time.substring(1..2)
-            finalTime = "$hour:$minute"
-            holder.time.text = finalTime
-        } else if(time.length == 2){
-            hour = time.substring(0..0)
-            minute = time.substring(1..1)
-            finalTime = "$hour:$minute"
-            holder.time.text = finalTime
-        }
+        holder.time.text = notification.time
 
         if (notification.repeat) {
             holder.repeat.text = context.getString(R.string.daily)

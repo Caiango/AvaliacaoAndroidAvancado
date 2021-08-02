@@ -11,7 +11,6 @@ import com.example.avaliacaoandroidavancado.model.NotificationDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
 
 class NotificationViewModel : ViewModel() {
 
@@ -36,7 +35,7 @@ class NotificationViewModel : ViewModel() {
 
     }
 
-    fun getNotificationByTime(db: NotificationDao, time: Int, context: Context) {
+    fun getNotificationByTime(db: NotificationDao, time: String, context: Context) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val list = db.getNotificationByTime(time)
@@ -47,7 +46,7 @@ class NotificationViewModel : ViewModel() {
         }
     }
 
-    fun deleteNotificationByTime(db: NotificationDao, time: Int) {
+    fun deleteNotificationByTime(db: NotificationDao, time: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 db.deleteNotificationByTime(time)
@@ -58,19 +57,10 @@ class NotificationViewModel : ViewModel() {
     private fun showNotification(
         notifications: List<MyNotifications>,
         context: Context,
-        time: Int
+        time: String
     ) {
         if (notifications.isNotEmpty()) {
-            val hour = Calendar.getInstance()[Calendar.HOUR_OF_DAY]
-
-            if (notifications.last().midday) {
-                NotificationHelper.createNotification(context, notifications.last(), time)
-            } else if (notifications.last().dawn && hour <= 1 && !notifications.last().midday) {
-                NotificationHelper.createNotification(context, notifications.last(), time)
-            } else if (!notifications.last().dawn && !notifications.last().midday && hour > 1) {
-                NotificationHelper.createNotification(context, notifications.last(), time)
-            }
-
+            NotificationHelper.createNotification(context, notifications.last(), time)
         }
     }
 

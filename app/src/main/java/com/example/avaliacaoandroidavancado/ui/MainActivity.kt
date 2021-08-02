@@ -66,16 +66,12 @@ class MainActivity : AppCompatActivity() {
 
         dialog.setPositiveButton(getString(R.string.add)) { _: DialogInterface, _: Int ->
 
-            var dawn = timePicker.hour <= 1
-            var midday = timePicker.hour >= 12
 
             val notification = MyNotifications(
                 title = title.text.toString(),
                 text = text.text.toString(),
-                time = "${timePicker.hour}${timePicker.minute}".toInt(),
-                repeat = checkRepeat.isChecked,
-                dawn = dawn,
-                midday = midday
+                time = "${timePicker.hour}:${timePicker.minute}",
+                repeat = checkRepeat.isChecked
             )
 
             notificationViewModel.insertNotification(notification, db!!)
