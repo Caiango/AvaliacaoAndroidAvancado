@@ -24,6 +24,7 @@ class AlarmHelper {
             val futureTime = Calendar.getInstance().apply {
                 set(Calendar.HOUR_OF_DAY, hour)
                 set(Calendar.MINUTE, min)
+                set(Calendar.SECOND, 0)
             }
 
             if (repeat) {
